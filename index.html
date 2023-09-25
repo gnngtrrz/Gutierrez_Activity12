@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <style>
+      .done {
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" id="todoInput" placeholder="Enter a task..." />
+      <button id="addTask">Add Task</button>
+      <ul id="taskList"></ul>
+    </div>
+
+    <script>
+      // adding a task
+      // aelect the input element and button using DOM methods.
+      const todoInput = document.getElementById("todoInput");
+      const taskList = document.getElementById("taskList");
+      const addTask = document.getElementById("addTask");
+
+      // add a click event listener to the button
+      addTask.addEventListener("click", function () {
+        if (todoInput.value === "") {
+          // input validation
+          alert("Please write something!");
+        } else {
+          let li = document.createElement("li");
+          let button = document.createElement("button");
+
+          // insert the input value to the li tags
+          let inputValue = document.createTextNode(todoInput.value);
+          let buttonText = document.createTextNode("x");
+
+          // append li and button tagstags
+          li.appendChild(inputValue);
+          button.appendChild(buttonText);
+
+          // create li tag with button
+          taskList.appendChild(li).appendChild(button);
+
+          // marking a task as done
+          li.addEventListener("click", function (event) {
+            const target = event.target;
+            target.classList.toggle("done");
+          });
+
+          // deleting a task
+          button.addEventListener("click", function (event) {
+            const target = event.currentTarget;
+            target.closest("li").remove();
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
